@@ -41,7 +41,7 @@ const ChatScreen = ({ roomId, name, userId }: ChatScreenPropsInterface) => {
       userMessageRef.current?.value !== ""
     ) {
       await activemqClient.publish({
-        destination: `/queue/messagesForBackend`,
+        destination: `/queue/messagesToSend`,
         body: JSON.stringify({
           roomId: roomId,
           userId: userId,
