@@ -40,12 +40,21 @@ const ChatScreen = ({ roomId, name, userId }: ChatScreenPropsInterface) => {
       userMessageRef.current !== null &&
       userMessageRef.current?.value !== ""
     ) {
-      await axios.post("http://localhost:3001/api/sendmessage", {
-        roomId: roomId,
-        userId: userId,
-        name: name,
-        message: userMessageRef.current.value,
+      await activemqClient.publish({
+        destination: `/queue/messagesForBackend`,
+        body: JSON.stringify({
+          roomId: roomId,
+          userId: userId,
+          name: name,
+          message: userMessageRef.current.value,
+        }),
       });
+      // await axios.post("http://localhost:3001/api/sendmessage", {
+      //   roomId: roomId,
+      //   userId: userId,
+      //   name: name,
+      //   message: userMessageRef.current.value,
+      // });
 
       userMessageRef.current.value = "";
     }
