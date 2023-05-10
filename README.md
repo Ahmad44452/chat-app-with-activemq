@@ -6,9 +6,7 @@
 
 ## **DEMO**
 
-
 https://user-images.githubusercontent.com/88369569/235585442-fea1c725-c022-4170-8cd8-b6208d450021.mp4
-
 
 <br>
 
@@ -60,14 +58,10 @@ https://user-images.githubusercontent.com/88369569/235585442-fea1c725-c022-4170-
     npm run npm-install-scripts
     </code>
 
-4. Edit `server/activemqClient.js` and `client/src/ActiveMQ/client.tsx` to set the broker URL as needed.
+4. Edit `client/src/ActiveMQ/client.tsx` to set the broker URL as needed.
 
-5. Start node server
-
-   `npm run server`
-
-6. Start client
+5. Start client
 
    `npm run client`
 
-7. Access the client in a browser
+6. Access the client in a browser

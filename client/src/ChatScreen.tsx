@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 import activemqClient from "./ActiveMQ/client";
-import axios from "axios";
 
 interface ChatScreenPropsInterface {
   roomId: String;
@@ -41,20 +40,13 @@ const ChatScreen = ({ roomId, name, userId }: ChatScreenPropsInterface) => {
       userMessageRef.current?.value !== ""
     ) {
       await activemqClient.publish({
-        destination: `/queue/messagesToSend`,
+        destination: `/topic/messages-${roomId}`,
         body: JSON.stringify({
-          roomId: roomId,
           userId: userId,
           name: name,
           message: userMessageRef.current.value,
         }),
       });
-      // await axios.post("http://localhost:3001/api/sendmessage", {
-      //   roomId: roomId,
-      //   userId: userId,
-      //   name: name,
-      //   message: userMessageRef.current.value,
-      // });
 
       userMessageRef.current.value = "";
     }
